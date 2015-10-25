@@ -46,10 +46,6 @@
       <HintPath>..\packages\BotBits.Permissions.1.1.6\lib\net40\BotBits.Permissions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="BotBitsExt.Storage, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BotBitsExt.Storage.1.0.4.0\lib\net40\BotBitsExt.Storage.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayerIOClient-Signed.3.2.369\lib\PlayerIOClient.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandsBase.cs" />
     <Compile Include="DefaultCommandsExtension.cs" />
     <Compile Include="OwnerCommands.cs" />
     <Compile Include="UtilityCommands.cs" />

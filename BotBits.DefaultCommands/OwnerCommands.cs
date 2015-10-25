@@ -3,39 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using BotBits.ChatExtras;
 using BotBits.Commands;
 using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    public class OwnerCommands : Package<UtilityCommands>
+    internal class OwnerCommands : CommandsBase<UtilityCommands>
     {
-        public OwnerCommands()
+        [Command(1, "kick", Usages = new[] { "username", "username reason" })]
+        void KickCommand(IInvokeSource source, ParsedRequest request)
         {
-            this.InitializeFinish += DefaultCommandsManager_InitializeFinish;
+            Group.Trusted.RequireFor(source);
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            this.RequireEqualRank(source, name);
+
+            var reason = request.GetTrail(1);
+            Chat.Of(this.BotBits).Kick(name, reason);
         }
 
-        private void DefaultCommandsManager_InitializeFinish(object sender, EventArgs e)
-        {
-            CommandLoader.Of(this.BotBits).Load(this);
-        }
-
-        [Command(0, "clear", Usage = "CLEAR")]
+        [Command(0, "clear", Usage = "")]
         private void AccessCommand(IInvokeSource source, ParsedRequest request)
         {
+            Group.Moderator.RequireFor(source);
             this.RequireOwner();
-
-            if (request.Count == 0 || request.Args[0] != "CLEAR")
-                throw new CommandException("To use clear, type !clear CLEAR");
-
             Room.Of(this.BotBits).Clear();
             source.Reply("Cleared level.");
         }
 
-        private void RequireOwner()
+        [Command(0, "loadlevel", Usage = "")]
+        void LoadlevelCommand(IInvokeSource source, ParsedRequest request)
         {
-            if (Room.Of(this.BotBits).AccessRight < AccessRight.Owner)
-                throw new CommandException("Bot must be world owner to run that command.");
+            Group.Trusted.RequireFor(source);
+            Chat.Of(this.BotBits).LoadLevel();
+        }
+
+        [Command(1, "kill", Usage = "username" )]
+        void KillCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            Chat.Of(this.BotBits).Kill(name);
+        }
+
+        [Command(1, "giveedit", "ge", Usage = "username")]
+        void GiveEditCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            Chat.Of(this.BotBits).GiveEdit(name);
+        }
+
+        [Command(1, "removeedit", "re", Usage = "username")]
+        void RemoveEditCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            Chat.Of(this.BotBits).RemoveEdit(name);
         }
     }
 }
