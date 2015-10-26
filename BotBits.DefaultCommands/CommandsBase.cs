@@ -21,17 +21,17 @@ namespace BotBits.DefaultCommands
 
         protected void RequireLowerRank(IInvokeSource source, string username)
         {
-            if (source.GetGroup() <= this.GetRank(username))
+            if (source.GetGroup() <= this.GetGroup(username))
                 throw new AccessDeniedCommandException("The target player is higher or equally ranked.");
         }
 
         protected void RequireEqualRank(IInvokeSource source, string username)
         {
-            if (source.GetGroup() < this.GetRank(username))
+            if (source.GetGroup() < this.GetGroup(username))
                 throw new AccessDeniedCommandException("The target player is higher ranked.");
         }
-
-        private Group GetRank(string username)
+        
+        private Group GetGroup(string username)
         {
             var player = Players.Of(this.BotBits).FromUsername(username).FirstOrDefault();
             if (player == null)
@@ -43,6 +43,18 @@ namespace BotBits.DefaultCommands
         {
             if (Room.Of(this.BotBits).AccessRight < AccessRight.Owner)
                 throw new CommandException("Bot must be world owner to run that command.");
+        }
+
+        protected void RequireWorldOptions()
+        {
+            if (Room.Of(this.BotBits).AccessRight < AccessRight.WorldOptions)
+                throw new CommandException("Bot must be world owner or crew member to run that command.");
+        }
+
+        protected void RequireEdit()
+        {
+            if (!Room.Of(this.BotBits).CanEdit)
+                throw new CommandException("Bot must have edit to run that command.");
         }
     }
 }
