@@ -7,7 +7,7 @@ using BotBits.Commands;
 
 namespace BotBits.DefaultCommands
 {
-    class DefaultCommandsExtension : Extension<DefaultCommandsExtension>
+    public sealed class DefaultCommandsExtension : Extension<DefaultCommandsExtension>
     {
         public static bool LoadInto(BotBitsClient client)
         {

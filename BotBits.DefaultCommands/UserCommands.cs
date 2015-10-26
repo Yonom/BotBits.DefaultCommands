@@ -8,7 +8,7 @@ using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    class UserCommands : CommandsBase<UtilityCommands>
+    sealed class UserCommands : CommandsBase<UtilityCommands>
     {
         [Command(1, "kick", Usages = new[] { "username [reason]" })]
         void KickCommand(IInvokeSource source, ParsedRequest request)

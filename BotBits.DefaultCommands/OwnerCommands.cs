@@ -9,7 +9,7 @@ using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    internal class OwnerCommands : CommandsBase<UtilityCommands>
+    internal sealed class OwnerCommands : CommandsBase<UtilityCommands>
     {
         [Command(0, "respawnall", Usage = "")]
         void RespawnAllCommand(IInvokeSource source, ParsedRequest request)

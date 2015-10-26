@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotBits.DefaultCommands", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultBot", "DefaultBot\DefaultBot.csproj", "{F8C7CADF-45ED-4C7D-A895-D78C593F9F4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{52C98FED-FC18-41B6-85A6-BFAEB15B4678}"
+EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "BotBits.DefaultCommands", "NuGet\BotBits.DefaultCommands\BotBits.DefaultCommands.nuproj", "{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{F8C7CADF-45ED-4C7D-A895-D78C593F9F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8C7CADF-45ED-4C7D-A895-D78C593F9F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8C7CADF-45ED-4C7D-A895-D78C593F9F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{211BEB24-92A8-43E0-8F46-99CEAC0D3DBD} = {52C98FED-FC18-41B6-85A6-BFAEB15B4678}
 	EndGlobalSection
 EndGlobal

@@ -9,7 +9,7 @@ using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    internal class UtilityCommands : CommandsBase<UtilityCommands>
+    internal sealed class UtilityCommands : CommandsBase<UtilityCommands>
     {
         [Command(0, "ping", Usage = "")]
         void PingCommand(IInvokeSource source, ParsedRequest request)

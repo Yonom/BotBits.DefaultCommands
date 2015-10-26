@@ -7,7 +7,7 @@ using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    internal class CommandsBase<T> : Package<T> where T : Package<T>, new()
+    internal abstract class CommandsBase<T> : Package<T> where T : Package<T>, new()
     {
         protected CommandsBase()
         {
