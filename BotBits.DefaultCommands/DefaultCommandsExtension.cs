@@ -11,7 +11,6 @@ namespace BotBits.DefaultCommands
     {
         public static bool LoadInto(BotBitsClient client)
         {
-            CommandsExtension.LoadInto(client);
             return LoadInto(client, null);
         }
     }

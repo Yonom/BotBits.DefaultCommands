@@ -8,7 +8,7 @@ using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    sealed class UserCommands : CommandsBase<UtilityCommands>
+    sealed class UserCommands : CommandsBase<UserCommands>
     {
         [Command(1, "kick", Usages = new[] { "username [reason]" })]
         void KickCommand(IInvokeSource source, ParsedRequest request)
@@ -28,6 +28,7 @@ namespace BotBits.DefaultCommands
             this.RequireOwner();
             var name = request.GetUsernameIn(this.BotBits, 0);
             Chat.Of(this.BotBits).Kill(name);
+            source.Reply("Killed {0}.", name);
         }
 
         [Command(1, "giveedit", "ge", Usage = "username")]
@@ -37,6 +38,7 @@ namespace BotBits.DefaultCommands
             this.RequireOwner();
             var name = request.GetUsernameIn(this.BotBits, 0);
             Chat.Of(this.BotBits).GiveEdit(name);
+            source.Reply("Gave edit to {0}.", name);
         }
 
         [Command(1, "removeedit", "re", Usage = "username")]
@@ -46,6 +48,27 @@ namespace BotBits.DefaultCommands
             this.RequireOwner();
             var name = request.GetUsernameIn(this.BotBits, 0);
             Chat.Of(this.BotBits).RemoveEdit(name);
+            source.Reply("Removed edit from {0}.", name);
+        }
+
+        [Command(1, "givegod", Usage = "username")]
+        void GiveGodCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            Chat.Of(this.BotBits).GiveGod(name);
+            source.Reply("Gave god to {0}.", name);
+        }
+
+        [Command(1, "removegod", Usage = "username")]
+        void RemoveGodCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+            var name = request.GetUsernameIn(this.BotBits, 0);
+            Chat.Of(this.BotBits).RemoveEdit(name);
+            source.Reply("Removed god from {0}.", name);
         }
 
         [Command(1, "tp", "teleport", Usages = new [] { "username [target]", "username x y"})]

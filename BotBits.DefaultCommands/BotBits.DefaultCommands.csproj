@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BotBits, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8d4a7b115348c43d, processorArchitecture=MSIL">
-      <HintPath>..\packages\BotBits.1.6.3\lib\net40\BotBits.dll</HintPath>
+      <HintPath>..\packages\BotBits.1.6.8\lib\net40\BotBits.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="BotBits.ChatExtras, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
