@@ -14,6 +14,8 @@ namespace BotBits.DefaultCommands
         void KickCommand(IInvokeSource source, ParsedRequest request)
         {
             Group.Trusted.RequireFor(source);
+            this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
             this.RequireEqualRank(source, name);
 
@@ -26,7 +28,9 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
+
             Chat.Of(this.BotBits).Kill(name);
             source.Reply("Killed {0}.", name);
         }
@@ -36,7 +40,9 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
+
             Chat.Of(this.BotBits).GiveEdit(name);
             source.Reply("Gave edit to {0}.", name);
         }
@@ -46,7 +52,9 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
+
             Chat.Of(this.BotBits).RemoveEdit(name);
             source.Reply("Removed edit from {0}.", name);
         }
@@ -56,7 +64,9 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
+
             Chat.Of(this.BotBits).GiveGod(name);
             source.Reply("Gave god to {0}.", name);
         }
@@ -66,8 +76,10 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var name = request.GetUsernameIn(this.BotBits, 0);
-            Chat.Of(this.BotBits).RemoveEdit(name);
+
+            Chat.Of(this.BotBits).RemoveGod(name);
             source.Reply("Removed god from {0}.", name);
         }
 
@@ -76,8 +88,8 @@ namespace BotBits.DefaultCommands
         {
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
+
             var username = request.GetUsernameIn(this.BotBits, 0);
-            this.RequireEqualRank(source, username);
 
             if (request.Count >= 3)
             {
@@ -91,7 +103,7 @@ namespace BotBits.DefaultCommands
                 try
                 {
                     var target = request.GetPlayerIn(this.BotBits, 1);
-                    Chat.Of(this.BotBits).Teleport(target.Username, target.BlockX, target.BlockY);
+                    Chat.Of(this.BotBits).Teleport(username, target.BlockX, target.BlockY);
                 }
                 catch (CommandException ex)
                 {
