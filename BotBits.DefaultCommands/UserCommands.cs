@@ -20,6 +20,9 @@ namespace BotBits.DefaultCommands
             this.RequireEqualRank(source, name);
 
             var reason = request.GetTrail(1);
+            if (String.IsNullOrEmpty(reason))
+                reason = "Tsk tsk tsk";
+            reason += " ~" + source.Name;
             Chat.Of(this.BotBits).Kick(name, reason);
         }
 
