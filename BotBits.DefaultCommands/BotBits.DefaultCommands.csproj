@@ -39,7 +39,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="BotBits.Commands, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BotBits.Commands.1.2.2\lib\net40\BotBits.Commands.dll</HintPath>
+      <HintPath>..\packages\BotBits.Commands.1.2.5\lib\net40\BotBits.Commands.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="BotBits.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
