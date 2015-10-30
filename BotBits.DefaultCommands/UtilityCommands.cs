@@ -120,6 +120,30 @@ namespace BotBits.DefaultCommands
             source.Reply("Aura set to {0}.", aura);
         }
 
+        [Command(1, "team", "setteam", Usage = "username [color]")]
+        void TeamCommand(IInvokeSource source, ParsedRequest request)
+        {
+            Group.Moderator.RequireFor(source);
+            this.RequireOwner();
+
+            var player = request.GetPlayerIn(this.BotBits, 0);
+            var color = Team.None;
+            if (request.Args.Length > 1)
+            {
+                try
+                {
+                    color = (Team)Enum.Parse(typeof(Team), request.Args[1], true);
+                }
+                catch (Exception ex)
+                {
+                    throw new CommandException("Unable to parse parameter: color", ex);
+                }
+            }
+            player.SetTeam(color);
+
+            source.Reply("Team of {0} set to {1}.", player.Username, color);
+        }
+
         [Command(0, "exit")]
         private void ExitCommand(IInvokeSource source, ParsedRequest request)
         {
