@@ -43,7 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="BotBits.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BotBits.Permissions.1.1.6\lib\net40\BotBits.Permissions.dll</HintPath>
+      <HintPath>..\packages\BotBits.Permissions.1.1.7\lib\net40\BotBits.Permissions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PlayerIOClient, Version=2.3.6.0, Culture=neutral, PublicKeyToken=c7f7b730653f6a44, processorArchitecture=MSIL">
