@@ -32,10 +32,10 @@ namespace BotBits.DefaultCommands
             Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
-            var name = request.GetUsernameIn(this.BotBits, 0);
-
-            Chat.Of(this.BotBits).Kill(name);
-            source.Reply("Killed {0}.", name);
+            var names = request.GetUsernamesIn(this.BotBits, 0);
+            foreach (var name in names)
+                Chat.Of(this.BotBits).Kill(name);
+            source.Reply("Killed {0}.", String.Join(", ", names));
         }
 
         [Command(1, "giveedit", "ge", Usage = "username")]
