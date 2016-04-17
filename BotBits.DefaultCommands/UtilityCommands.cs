@@ -101,23 +101,36 @@ namespace BotBits.DefaultCommands
             source.Reply("Smiley set to {0}.", smiley);
         }
 
-        [Command(1, "setaura", Usage = "aura")]
+        [Command(1, "setaura", Usage = "color [shape]")]
         void AuraCommand(IInvokeSource source, ParsedRequest request)
         {
             Group.Moderator.RequireFor(source);
 
-            Aura aura;
+            AuraColor color;
             try
             {
-                aura = (Aura)Enum.Parse(typeof(Aura), request.Args[0], true);
+                color = (AuraColor)Enum.Parse(typeof(AuraColor), request.Args[0], true);
             }
             catch (Exception ex)
             {
-                throw new CommandException("Unable to parse parameter: aura", ex);
+                throw new CommandException("Unable to parse parameter: color", ex);
             }
 
-            Actions.Of(this.BotBits).ChangeAura(aura);
-            source.Reply("Aura set to {0}.", aura);
+            AuraShape shape = Players.Of(this.BotBits).OwnPlayer.AuraShape;
+            if (request.Count >= 2)
+            {
+                try
+                {
+                    shape = (AuraShape)Enum.Parse(typeof(AuraShape), request.Args[0], true);
+                }
+                catch (Exception ex)
+                {
+                    throw new CommandException("Unable to parse parameter: shape", ex);
+                }
+            }
+
+            Actions.Of(this.BotBits).ChangeAura(shape, color);
+            source.Reply("Aura set to {0}/{1}.", color, shape);
         }
 
         [Command(1, "team", "setteam", Usage = "username [color]")]

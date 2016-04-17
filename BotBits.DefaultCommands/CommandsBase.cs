@@ -41,19 +41,19 @@ namespace BotBits.DefaultCommands
 
         protected void RequireOwner()
         {
-            if (Room.Of(this.BotBits).AccessRight < AccessRight.Owner)
+            if (Actions.Of(this.BotBits).AccessRight < AccessRight.Owner)
                 throw new CommandException("Bot must be world owner to run that command.");
         }
 
         protected void RequireWorldOptions()
         {
-            if (Room.Of(this.BotBits).AccessRight < AccessRight.WorldOptions)
+            if (Actions.Of(this.BotBits).AccessRight < AccessRight.WorldOptions)
                 throw new CommandException("Bot must be world owner or crew member to run that command.");
         }
 
         protected void RequireEdit()
         {
-            if (!Room.Of(this.BotBits).CanEdit)
+            if (!Actions.Of(this.BotBits).CanEdit)
                 throw new CommandException("Bot must have edit to run that command.");
         }
     }

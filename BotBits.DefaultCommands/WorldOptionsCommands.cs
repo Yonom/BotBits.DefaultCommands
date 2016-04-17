@@ -50,13 +50,13 @@ namespace BotBits.DefaultCommands
             source.Reply("Loaded level.");
         }
 
-        [Command(0, "reset", Usage = "")]
+        [Command(0, "resetall", Usage = "")]
         void ResetCommand(IInvokeSource source, ParsedRequest request)
         {
             Group.Moderator.RequireFor(source);
             this.RequireWorldOptions();
 
-            Chat.Of(this.BotBits).Reset();
+            Chat.Of(this.BotBits).ResetAll();
             source.Reply("Level reset.");
         }
     }
