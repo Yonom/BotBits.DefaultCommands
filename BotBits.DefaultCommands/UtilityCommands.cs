@@ -11,18 +11,15 @@ namespace BotBits.DefaultCommands
 {
     internal sealed class UtilityCommands : CommandsBase<UtilityCommands>
     {
-        [Command(0, "ping", Usage = "")]
+        [RestrictedCommand(Group.Moderator, 0, "ping", Usage = "")]
         void PingCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             source.Reply("Pong.");
         }
 
-        [Command(0, "access", Usage = "[key]")]
+        [RestrictedCommand(Group.Moderator, 0, "access", Usage = "[key]")]
         void AccessCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             string key = String.Empty;
 
             if (request.Count >= 1)
@@ -33,11 +30,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Access sent.");
         }
 
-        [Command(1, "autosay", Usage = "text")]
+        [RestrictedCommand(Group.Moderator, 1, "autosay", Usage = "text")]
         private void AutosayCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             AutoText text;
             try
             {
@@ -51,19 +46,15 @@ namespace BotBits.DefaultCommands
             Actions.Of(this.BotBits).AutoSay(text);
         }
 
-        [Command(1, "say", Usage = "text")]
+        [RestrictedCommand(Group.Moderator, 1, "say", Usage = "text")]
         private void SayCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             Chat.Of(this.BotBits).Say(request.GetTrail(0));
         }
 
-        [Command(1, "sayraw", Usage = "text")]
+        [RestrictedCommand(Group.Admin, 1, "sayraw", Usage = "text")]
         private void SayrawCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Admin.RequireFor(source);
-
             if (ChatFormatsExtension.IsLoadedInto(this.BotBits))
             {
                 Chat.Of(this.BotBits).Send(request.GetTrail(0));
@@ -74,19 +65,15 @@ namespace BotBits.DefaultCommands
             }
         }
 
-        [Command(0, "die", Usage = "")]
+        [RestrictedCommand(Group.Moderator, 0, "die", Usage = "")]
         private void DieCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             Actions.Of(this.BotBits).Die();
         }
 
-        [Command(1, "setsmiley", Usage = "smiley")]
+        [RestrictedCommand(Group.Moderator, 1, "setsmiley", Usage = "smiley")]
         private void SetSmileyCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             Smiley smiley;
             try
             {
@@ -101,11 +88,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Smiley set to {0}.", smiley);
         }
 
-        [Command(1, "setaura", Usage = "color [shape]")]
+        [RestrictedCommand(Group.Moderator, 1, "setaura", Usage = "color [shape]")]
         void AuraCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             AuraColor color;
             try
             {
@@ -133,10 +118,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Aura set to {0}/{1}.", color, shape);
         }
 
-        [Command(1, "team", "setteam", Usage = "username [color]")]
+        [RestrictedCommand(Group.Moderator, 1, "team", "setteam", Usage = "username [color]")]
         void TeamCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var player = request.GetPlayerIn(this.BotBits, 0);
@@ -157,10 +141,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Team of {0} set to {1}.", player.Username, color);
         }
 
-        [Command(0, "exit")]
+        [RestrictedCommand(Group.Admin, 0, "exit")]
         private void ExitCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Admin.RequireFor(source);
             source.Reply("Exiting...");
 
             this.BotBits.Dispose();

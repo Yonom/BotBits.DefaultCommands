@@ -10,10 +10,9 @@ namespace BotBits.DefaultCommands
 {
     sealed class UserCommands : CommandsBase<UserCommands>
     {
-        [Command(1, "kick", Usages = new[] { "username [reason]" })]
+        [RestrictedCommand(Group.Trusted, 1, "kick", Usages = new[] { "username [reason]" })]
         void KickCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Trusted.RequireFor(source);
             this.RequireOwner();
 
             var name = request.GetUsernameIn(this.BotBits, 0);
@@ -26,10 +25,9 @@ namespace BotBits.DefaultCommands
             Chat.Of(this.BotBits).Kick(name, reason);
         }
 
-        [Command(1, "kill", Usage = "username")]
+        [RestrictedCommand(Group.Moderator, 1, "kill", Usage = "username")]
         void KillCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var names = request.GetUsernamesIn(this.BotBits, 0);
@@ -38,10 +36,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Killed {0}.", String.Join(", ", names));
         }
 
-        [Command(1, "giveedit", "ge", Usage = "username")]
+        [RestrictedCommand(Group.Moderator, 1, "giveedit", "ge", Usage = "username")]
         void GiveEditCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var name = request.GetUsernameIn(this.BotBits, 0);
@@ -50,10 +47,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Gave edit to {0}.", name);
         }
 
-        [Command(1, "removeedit", "re", Usage = "username")]
+        [RestrictedCommand(Group.Moderator, 1, "removeedit", "re", Usage = "username")]
         void RemoveEditCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var name = request.GetUsernameIn(this.BotBits, 0);
@@ -62,10 +58,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Removed edit from {0}.", name);
         }
 
-        [Command(1, "givegod", Usage = "username")]
+        [RestrictedCommand(Group.Moderator, 1, "givegod", Usage = "username")]
         void GiveGodCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var name = request.GetUsernameIn(this.BotBits, 0);
@@ -74,10 +69,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Gave god to {0}.", name);
         }
 
-        [Command(1, "removegod", Usage = "username")]
+        [RestrictedCommand(Group.Moderator, 1, "removegod", Usage = "username")]
         void RemoveGodCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var name = request.GetUsernameIn(this.BotBits, 0);
@@ -86,10 +80,9 @@ namespace BotBits.DefaultCommands
             source.Reply("Removed god from {0}.", name);
         }
 
-        [Command(1, "tp", "teleport", Usages = new [] { "username [target]", "username x y"})]
+        [RestrictedCommand(Group.Moderator, 1, "tp", "teleport", Usages = new [] { "username [target]", "username x y"})]
         void TeleportCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireOwner();
 
             var username = request.GetUsernameIn(this.BotBits, 0);

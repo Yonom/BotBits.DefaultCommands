@@ -9,10 +9,9 @@ namespace BotBits.DefaultCommands
 {
     internal sealed class EditCommands : CommandsBase<EditCommands>
     {
-        [Command(1, "godmode", Usage = "enable")]
+        [RestrictedCommand(Group.Moderator, 1, "godmode", Usage = "enable")]
         void GodModeCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
             this.RequireEdit();
 
             bool enabled;
@@ -38,20 +37,16 @@ namespace BotBits.DefaultCommands
             source.Reply("God mode was set to {0}.", enabled);
         }
 
-        [Command(0, "modmode", Usage = "")]
-        void AdminModeCommand(IInvokeSource source, ParsedRequest request)
+        [RestrictedCommand(Group.Moderator, 0, "modmode", Usage = "")]
+        void ModModeCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             Actions.Of(this.BotBits).ToggleModMode();
             source.Reply("Mod mode was toggled.");
         }
 
-        [Command(0, "adminmode", Usage = "")]
-        void ModModeCommand(IInvokeSource source, ParsedRequest request)
+        [RestrictedCommand(Group.Moderator, 0, "adminmode", Usage = "")]
+        void AdminModeCommand(IInvokeSource source, ParsedRequest request)
         {
-            Group.Moderator.RequireFor(source);
-
             Actions.Of(this.BotBits).ToggleAdminMode();
             source.Reply("Admin mode was toggled.");
         }
