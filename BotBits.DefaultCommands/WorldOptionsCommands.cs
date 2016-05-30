@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BotBits.Commands;
 using BotBits.Permissions;
 
@@ -58,6 +55,44 @@ namespace BotBits.DefaultCommands
 
             Chat.Of(this.BotBits).ResetAll();
             source.Reply("Level reset.");
+        }
+
+        [RestrictedCommand(Group.Moderator, 1, "visible", Usage = "visibility")]
+        void VisibleCommand(IInvokeSource source, ParsedRequest request)
+        {
+            this.RequireWorldOptions();
+
+            bool visible;
+            try
+            {
+                visible = bool.Parse(request.Args[1]);
+            }
+            catch (Exception ex)
+            {
+                throw new CommandException("Unable to parse parameter: visibility", ex);
+            }
+
+            Room.Of(this.BotBits).SetRoomVisible(visible);
+            source.Reply("World visible: " + visible);
+        }
+
+        [RestrictedCommand(Group.Moderator, 1, "hidelobby", Usage = "hidden")]
+        void HideLobbyCommand(IInvokeSource source, ParsedRequest request)
+        {
+            this.RequireWorldOptions();
+
+            bool hide;
+            try
+            {
+                hide = bool.Parse(request.Args[1]);
+            }
+            catch (Exception ex)
+            {
+                throw new CommandException("Unable to parse parameter: hidden", ex);
+            }
+
+            Room.Of(this.BotBits).SetHideLobby(hide);
+            source.Reply("Hidden from lobby: " + hide);
         }
     }
 }

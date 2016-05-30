@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using BotBits.ChatExtras;
-using BotBits.Commands;
+﻿using BotBits.Commands;
 using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
