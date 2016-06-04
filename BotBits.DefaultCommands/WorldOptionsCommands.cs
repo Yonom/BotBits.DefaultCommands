@@ -60,7 +60,7 @@ namespace BotBits.DefaultCommands
             bool visible;
             try
             {
-                visible = bool.Parse(request.Args[1]);
+                visible = bool.Parse(request.Args[0]);
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace BotBits.DefaultCommands
             bool hide;
             try
             {
-                hide = bool.Parse(request.Args[1]);
+                hide = bool.Parse(request.Args[0]);
             }
             catch (Exception ex)
             {
