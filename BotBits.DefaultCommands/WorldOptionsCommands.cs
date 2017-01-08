@@ -7,11 +7,11 @@ namespace BotBits.DefaultCommands
     internal sealed class WorldOptionsCommands : CommandsBase<WorldOptionsCommands>
     {
         [RestrictedCommand(Group.Moderator, 1, "name", Usage = "name")]
-        void NameCommand(IInvokeSource source, ParsedRequest request)
+        private void NameCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireWorldOptions();
 
-            string name = request.GetTrail(0);
+            var name = request.GetTrail(0);
             Room.Of(this.BotBits).SetName(name);
             source.Reply("Name changed to: {0}", name);
         }
@@ -35,7 +35,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 0, "loadlevel", Usage = "")]
-        void LoadlevelCommand(IInvokeSource source, ParsedRequest request)
+        private void LoadlevelCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireWorldOptions();
 
@@ -44,7 +44,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 0, "resetall", Usage = "")]
-        void ResetCommand(IInvokeSource source, ParsedRequest request)
+        private void ResetCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireWorldOptions();
 
@@ -53,7 +53,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "visible", Usage = "visibility")]
-        void VisibleCommand(IInvokeSource source, ParsedRequest request)
+        private void VisibleCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireWorldOptions();
 
@@ -72,7 +72,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "hidelobby", Usage = "hidden")]
-        void HideLobbyCommand(IInvokeSource source, ParsedRequest request)
+        private void HideLobbyCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireWorldOptions();
 

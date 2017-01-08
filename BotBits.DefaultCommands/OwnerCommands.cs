@@ -6,7 +6,7 @@ namespace BotBits.DefaultCommands
     internal sealed class OwnerCommands : CommandsBase<OwnerCommands>
     {
         [RestrictedCommand(Group.Moderator, 0, "respawnall", Usage = "")]
-        void RespawnAllCommand(IInvokeSource source, ParsedRequest request)
+        private void RespawnAllCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -15,7 +15,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 0, "killall", "killemall", Usage = "")]
-        void KillAllCommand(IInvokeSource source, ParsedRequest request)
+        private void KillAllCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 

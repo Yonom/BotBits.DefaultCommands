@@ -1,14 +1,13 @@
-﻿using System;
-using BotBits.ChatExtras;
+﻿using BotBits.ChatExtras;
 using BotBits.Commands;
 using BotBits.Permissions;
 
 namespace BotBits.DefaultCommands
 {
-    sealed class UserCommands : CommandsBase<UserCommands>
+    internal sealed class UserCommands : CommandsBase<UserCommands>
     {
         [RestrictedCommand(Group.Trusted, 1, "kick", Usages = new[] { "username [reason]" })]
-        void KickCommand(IInvokeSource source, ParsedRequest request)
+        private void KickCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -16,25 +15,23 @@ namespace BotBits.DefaultCommands
             this.RequireEqualRank(source, name);
 
             var reason = request.GetTrail(1);
-            if (String.IsNullOrEmpty(reason))
-                reason = "Tsk tsk tsk";
+            if (string.IsNullOrEmpty(reason)) reason = "Tsk tsk tsk";
             reason += " ~" + source.Name;
             Chat.Of(this.BotBits).Kick(name, reason);
         }
 
         [RestrictedCommand(Group.Moderator, 1, "kill", Usage = "username")]
-        void KillCommand(IInvokeSource source, ParsedRequest request)
+        private void KillCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
             var names = request.GetUsernamesIn(this.BotBits, 0);
-            foreach (var name in names)
-                Chat.Of(this.BotBits).Kill(name);
-            source.Reply("Killed {0}.", String.Join(", ", names));
+            foreach (var name in names) Chat.Of(this.BotBits).Kill(name);
+            source.Reply("Killed {0}.", string.Join(", ", names));
         }
 
         [RestrictedCommand(Group.Moderator, 1, "giveedit", "ge", Usage = "username")]
-        void GiveEditCommand(IInvokeSource source, ParsedRequest request)
+        private void GiveEditCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -45,7 +42,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "removeedit", "re", Usage = "username")]
-        void RemoveEditCommand(IInvokeSource source, ParsedRequest request)
+        private void RemoveEditCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -56,7 +53,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "givegod", Usage = "username")]
-        void GiveGodCommand(IInvokeSource source, ParsedRequest request)
+        private void GiveGodCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -67,7 +64,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "removegod", Usage = "username")]
-        void RemoveGodCommand(IInvokeSource source, ParsedRequest request)
+        private void RemoveGodCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -77,8 +74,8 @@ namespace BotBits.DefaultCommands
             source.Reply("Removed god from {0}.", name);
         }
 
-        [RestrictedCommand(Group.Moderator, 1, "tp", "teleport", Usages = new [] { "username [target]", "username x y"})]
-        void TeleportCommand(IInvokeSource source, ParsedRequest request)
+        [RestrictedCommand(Group.Moderator, 1, "tp", "teleport", Usages = new[] { "username [target]", "username x y" })]
+        private void TeleportCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
@@ -86,8 +83,8 @@ namespace BotBits.DefaultCommands
 
             if (request.Count >= 3)
             {
-                int x = request.GetInt(1);
-                int y = request.GetInt(2);
+                var x = request.GetInt(1);
+                var y = request.GetInt(2);
 
                 Chat.Of(this.BotBits).Teleport(username, x, y);
             }
@@ -108,8 +105,8 @@ namespace BotBits.DefaultCommands
                 var playerSource = source as PlayerInvokeSource;
                 if (playerSource != null)
                 {
-                    int x = playerSource.Player.BlockX;
-                    int y = playerSource.Player.BlockX;
+                    var x = playerSource.Player.BlockX;
+                    var y = playerSource.Player.BlockX;
 
                     Chat.Of(this.BotBits).Teleport(username, x, y);
                 }
@@ -119,7 +116,7 @@ namespace BotBits.DefaultCommands
                 }
             }
 
-            source.Reply("Teleported {0}.", PlayerUtils.GetChatName(username));
+            source.Reply("Teleported {0}.", Player.GetChatName(username));
         }
     }
 }

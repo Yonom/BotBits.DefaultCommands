@@ -8,18 +8,17 @@ namespace BotBits.DefaultCommands
     internal sealed class UtilityCommands : CommandsBase<UtilityCommands>
     {
         [RestrictedCommand(Group.Moderator, 0, "ping", Usage = "")]
-        void PingCommand(IInvokeSource source, ParsedRequest request)
+        private void PingCommand(IInvokeSource source, ParsedRequest request)
         {
             source.Reply("Pong.");
         }
 
         [RestrictedCommand(Group.Moderator, 0, "access", Usage = "[key]")]
-        void AccessCommand(IInvokeSource source, ParsedRequest request)
+        private void AccessCommand(IInvokeSource source, ParsedRequest request)
         {
-            string key = String.Empty;
+            var key = string.Empty;
 
-            if (request.Count >= 1)
-                key = request.GetTrail(0);
+            if (request.Count >= 1) key = request.GetTrail(0);
 
             Actions.Of(this.BotBits).Access(key);
 
@@ -85,7 +84,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "setaura", Usage = "color [shape]")]
-        void AuraCommand(IInvokeSource source, ParsedRequest request)
+        private void AuraCommand(IInvokeSource source, ParsedRequest request)
         {
             AuraColor color;
             try
@@ -97,7 +96,7 @@ namespace BotBits.DefaultCommands
                 throw new CommandException("Unable to parse parameter: color", ex);
             }
 
-            AuraShape shape = Players.Of(this.BotBits).OwnPlayer.AuraShape;
+            var shape = Players.Of(this.BotBits).OwnPlayer.AuraShape;
             if (request.Count >= 2)
             {
                 try
@@ -115,7 +114,7 @@ namespace BotBits.DefaultCommands
         }
 
         [RestrictedCommand(Group.Moderator, 1, "team", "setteam", Usage = "username [color]")]
-        void TeamCommand(IInvokeSource source, ParsedRequest request)
+        private void TeamCommand(IInvokeSource source, ParsedRequest request)
         {
             this.RequireOwner();
 
